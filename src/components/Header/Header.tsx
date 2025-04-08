@@ -1,10 +1,12 @@
 import React from "react";
 import { renderLog } from "../../utils";
 import { useAppContext } from "../../contexts/UserContext/UserContext";
+import { useThemeContext } from "../../contexts/ThemeContext/ThemeContext";
 
 export const Header: React.FC = () => {
   renderLog("Header rendered");
-  const { theme, toggleTheme, user, login, logout } = useAppContext();
+  const { user, login, logout } = useAppContext();
+  const { theme, toggleTheme } = useThemeContext();
 
   const handleLogin = () => {
     // 실제 애플리케이션에서는 사용자 입력을 받아야 합니다.

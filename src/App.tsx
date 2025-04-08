@@ -1,15 +1,18 @@
 import React, { useState } from "react";
 import { generateItems } from "./utils";
 import { AppContext } from "./contexts/UserContext/UserContext";
+import { ThemeContext } from "./contexts/ThemeContext/ThemeContext";
 import {
   User,
   Notification,
   AppContextType,
 } from "./contexts/UserContext/types";
+import { ThemeContextType } from "./contexts/ThemeContext/types";
 import { Header } from "./components/Header/Header";
 import { ItemList } from "./components/ItemList/ItemList";
 import { ComplexForm } from "./components/ComplexForm/ComplexForm";
 import { NotificationSystem } from "./components/NotificationSystem/NotificationSystem";
+
 const App: React.FC = () => {
   const [theme, setTheme] = useState("light");
   const [items, setItems] = useState(generateItems(1000));
@@ -53,8 +56,6 @@ const App: React.FC = () => {
   };
 
   const contextValue: AppContextType = {
-    theme,
-    toggleTheme,
     user,
     login,
     logout,
@@ -63,24 +64,31 @@ const App: React.FC = () => {
     removeNotification,
   };
 
+  const themeContextValue: ThemeContextType = {
+    theme,
+    toggleTheme,
+  };
+
   return (
     <AppContext.Provider value={contextValue}>
-      <div
-        className={`min-h-screen ${theme === "light" ? "bg-gray-100" : "bg-gray-900 text-white"}`}
-      >
-        <Header />
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex flex-col md:flex-row">
-            <div className="w-full md:w-1/2 md:pr-4">
-              <ItemList items={items} onAddItemsClick={addItems} />
-            </div>
-            <div className="w-full md:w-1/2 md:pl-4">
-              <ComplexForm />
+      <ThemeContext.Provider value={themeContextValue}>
+        <div
+          className={`min-h-screen ${theme === "light" ? "bg-gray-100" : "bg-gray-900 text-white"}`}
+        >
+          <Header />
+          <div className="container mx-auto px-4 py-8">
+            <div className="flex flex-col md:flex-row">
+              <div className="w-full md:w-1/2 md:pr-4">
+                <ItemList items={items} onAddItemsClick={addItems} />
+              </div>
+              <div className="w-full md:w-1/2 md:pl-4">
+                <ComplexForm />
+              </div>
             </div>
           </div>
+          <NotificationSystem />
         </div>
-        <NotificationSystem />
-      </div>
+      </ThemeContext.Provider>
     </AppContext.Provider>
   );
 };
