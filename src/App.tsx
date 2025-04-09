@@ -1,9 +1,9 @@
 import { Providers } from "./context/providers.tsx";
-import { Header } from "./components/Header";
-import { NotificationSystem } from "./components/NotificationSystem";
-import { ItemList } from "./components/ItemList";
-import { ComplexForm } from "./components/ComplexForm";
-import { ThemedBackground } from "./components/themedBackground";
+import { Header } from "./components/Header.tsx";
+import { NotificationSystem } from "./components/NotificationSystem.tsx";
+import { ItemList } from "./components/ItemList.tsx";
+import { ComplexForm } from "./components/ComplexForm.tsx";
+import { ThemedBackground } from "./components/ThemedBackground.tsx";
 
 // 메인 App 컴포넌트
 const App = () => {
