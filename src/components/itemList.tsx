@@ -1,15 +1,14 @@
-import React, { useState } from "react";
-import { renderLog } from "../../utils";
-import { useThemeContext } from "../../contexts/ThemeContext/ThemeContext";
-import { Item } from "../../contexts/UserContext/types";
+import { useState } from "react";
+import { memo } from "../@lib";
+import { renderLog } from "../utils";
+import { useThemeContext } from "../context/theme";
+import { useItemContext } from "../context/item";
 
-export const ItemList: React.FC<{
-  items: Item[];
-  onAddItemsClick: () => void;
-}> = ({ items, onAddItemsClick }) => {
+export const ItemList = memo(() => {
   renderLog("ItemList rendered");
   const [filter, setFilter] = useState("");
   const { theme } = useThemeContext();
+  const { items, addItems } = useItemContext();
 
   const filteredItems = items.filter(
     (item) =>
@@ -29,7 +28,7 @@ export const ItemList: React.FC<{
           <button
             type="button"
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded text-xs"
-            onClick={onAddItemsClick}
+            onClick={addItems}
           >
             대량추가
           </button>
@@ -59,4 +58,4 @@ export const ItemList: React.FC<{
       </ul>
     </div>
   );
-};
+});

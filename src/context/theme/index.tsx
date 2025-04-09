@@ -1,5 +1,9 @@
 import { createContext, useContext } from "react";
-import { ThemeContextType } from "./types";
+
+interface ThemeContextType {
+  theme: string;
+  toggleTheme: () => void;
+}
 
 export const ThemeContext = createContext<ThemeContextType | undefined>(
   undefined,
@@ -8,7 +12,7 @@ export const ThemeContext = createContext<ThemeContextType | undefined>(
 export const useThemeContext = () => {
   const context = useContext(ThemeContext);
   if (context === undefined) {
-    throw new Error("useThemeContext must be used within a ThemeProvider");
+    throw new Error("useThemeContext is undefined");
   }
   return context;
 };

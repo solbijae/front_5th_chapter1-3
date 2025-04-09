@@ -1,21 +1,19 @@
-import React from "react";
-import { renderLog } from "../../utils";
-import { useAppContext } from "../../contexts/UserContext/UserContext";
-import { useThemeContext } from "../../contexts/ThemeContext/ThemeContext";
+import { useUserContext } from "../context/user";
+import { useThemeContext } from "../context/theme";
+import { renderLog } from "../utils";
 
-export const Header: React.FC = () => {
+export const Header = () => {
   renderLog("Header rendered");
-  const { user, login, logout } = useAppContext();
   const { theme, toggleTheme } = useThemeContext();
+  const { user, login, logout } = useUserContext();
 
   const handleLogin = () => {
-    // 실제 애플리케이션에서는 사용자 입력을 받아야 합니다.
-    login("user@example.com", "password");
+    login("test@test.com", "password"); // TODO: 실제 사용자 입력을 받아야 함
   };
 
   return (
     <header className="bg-gray-800 text-white p-4">
-      <div className="container mx-auto flex justify-between items-center">
+      <div className="container mx-auto flex justify-between iteㄴms-center">
         <h1 className="text-2xl font-bold">샘플 애플리케이션</h1>
         <div className="flex items-center">
           <button
